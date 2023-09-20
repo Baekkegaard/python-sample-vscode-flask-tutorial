@@ -45,4 +45,4 @@ steps:
       parser.add_argument("--world", help="Provide the name of the world to greet.")
       args = parser.parse_args()
       print ('Hello ', args.world)
-    arguments: --world Venus
+    arguments: --world Venus -h
