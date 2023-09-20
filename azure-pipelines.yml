@@ -30,7 +30,19 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+- script: pip install pytest pytest-azurepipelines
+- script: pytest
+
+- task: PythonScript@0
+  inputs:
+    scriptSource: inline
+    script: |
+      import sys
+      print ('Executing script file is:', str(sys.argv[0]))
+      print ('The arguments are:', str(sys.argv))
+      import argparse
+      parser = argparse.ArgumentParser()
+      parser.add_argument("--world", help="Provide the name of the world to greet.")
+      args = parser.parse_args()
+      print ('Hello ', args.world)
+    arguments: --world Venus
